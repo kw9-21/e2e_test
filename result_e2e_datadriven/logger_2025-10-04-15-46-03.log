@@ -1,0 +1,33 @@
+10/04 03:46:03 PM | Args: Namespace(lr=0.05, epochs=10, batch_size=256, save_dir='./result_e2e_datadriven', dataset_path='/home/dancer/wxr_code/e2e_prune/data', gpu_id='4', alpha_final=0.2, w_params_final=1.0, w_params_anneal_epochs=3, target_static_params_ratio=0.5, warmup_epochs=3, annealing_epochs_pct=0.7, dynamic_rate_start=0.7, dynamic_rate_end=0.7, gate_threshold=0.1, backbone='resnet50', target_flops_ratio=0.5)
+10/04 03:46:05 PM | ==> Building full-size resnet50 for training and target calculation...
+10/04 03:46:06 PM | ==> Accurately calculating FLOPs breakdown from a clean, original model...
+10/04 03:46:07 PM | ==> FLOPs Sanity Check:
+10/04 03:46:07 PM |   - Total FLOPs by Global Profile (Authoritative): 1559.586 M
+10/04 03:46:07 PM |   - Total FLOPs by Sum of Parts:                 1373.558 M
+10/04 03:46:07 PM |   - Discrepancy: 11.93%
+10/04 03:46:07 PM |   - Sanity Check Warning: Discrepancy > 5%.
+10/04 03:46:07 PM | ==> Final FLOPs Targets:
+10/04 03:46:07 PM |   - Max Theoretical FLOPs: 1559.59 M
+10/04 03:46:07 PM |   - Target Total FLOPs (50.0%): 779.79 M
+10/04 03:46:07 PM |   - Target Scalable FLOPs for Training: 715.74 M
+10/04 03:46:07 PM | Full model total parameters: 44.341 M
+10/04 03:46:07 PM | Target total parameters (50.0%): 22.171 M
+10/04 03:46:07 PM | ==> Main model for training is ready.
+10/04 03:46:07 PM | ==> Building main model for training...
+10/04 03:46:08 PM | ==> Separating parameters into four groups for optimization...
+10/04 03:46:08 PM |  - Main backbone params: 161 tensors.
+10/04 03:46:08 PM |  - Gating (logit & static) params: 48 tensors.
+10/04 03:46:08 PM |  - Auxiliary head params: 15 tensors.
+10/04 03:46:08 PM |  - Budget generator params: 18 tensors.
+10/04 03:46:08 PM | ==> Four optimizers created successfully.
+10/04 03:46:08 PM | ==> LR scheduler set: 5-epoch linear warmup + Cosine Annealing.
+10/04 03:46:08 PM | 
+############################################################
+10/04 03:46:08 PM | #####      STARTING UNIFIED ADAPTIVE TRAINING      #####
+10/04 03:46:08 PM | Total Epochs: 10, Warmup Epochs: 3
+10/04 03:46:08 PM | Loss Weights: w_aux=0.1, w_flops=2.0, w_params_final=1.0
+10/04 03:46:08 PM | Target Total FLOPs: 779.79 MFLOPs
+10/04 03:46:08 PM | Target Total FLOPs (Train): 715.74 MFLOPs
+10/04 03:46:08 PM | ############################################################
+
+10/04 03:46:08 PM | [Epoch 1/10] [WARMUP] LR: 0.004000 | w_params: 0.0000

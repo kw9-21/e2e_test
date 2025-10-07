@@ -1,0 +1,49 @@
+10/05 08:26:36 PM | Args: Namespace(lr=0.05, epochs=5, batch_size=128, save_dir='run_cifar10_deit', dataset_path='/home/dancer/wxr_code/e2e_prune/data', gpu_id='4', alpha_final=0.2, w_params_final=1.0, w_params_anneal_epochs=2, target_static_params_ratio=0.7, warmup_epochs=2, annealing_epochs_pct=0.7, dynamic_rate_start=0.7, dynamic_rate_end=0.7, gate_threshold=0.1, backbone='deit_tiny', bottleneck_strategy='A', dataset='cifar10', img_size=None, num_workers=4, imagenet_train_dir='/home/dancer/PublicData/ImageNet/train', imagenet_val_dir='/home/dancer/PublicData/ImageNet/val', target_flops_ratio=0.5)
+10/05 08:26:38 PM | ==> Building full-size deit_tiny for training and target calculation...
+10/05 08:26:39 PM | ==> FLOPs Sanity Check:
+10/05 08:26:39 PM |   - Total FLOPs by Global Profile (Authoritative): 107.815 M
+10/05 08:26:39 PM |   - Total FLOPs by Sum of Parts:                 107.815 M
+10/05 08:26:39 PM |   - Discrepancy: 0.00%
+10/05 08:26:39 PM | ==> [DEBUG] FLOPs Breakdown Details:
+10/05 08:26:39 PM |   - [CoreOnly e2e]    107.133 M
+10/05 08:26:39 PM |   - [Global-Overhead] 107.133 M
+10/05 08:26:39 PM |   - [CoreOnly - SumScalable] 0.000 M
+10/05 08:26:39 PM |   - conv1+bn1 FLOPs: 98.283 M
+10/05 08:26:39 PM |   - layer1 FLOPs:     2.212 M
+10/05 08:26:39 PM |   - layer2 FLOPs:     2.212 M
+10/05 08:26:39 PM |   - layer3 FLOPs:     2.212 M
+10/05 08:26:39 PM |   - layer4 FLOPs:     2.212 M
+10/05 08:26:39 PM |   - fc FLOPs:         0.002 M
+10/05 08:26:39 PM |   - Scalable total:   107.133 M
+10/05 08:26:39 PM |   - Overhead:gating   0.225 M
+10/05 08:26:39 PM |   - Overhead:static   0.000 M
+10/05 08:26:39 PM |   - Overhead:aux      0.006 M
+10/05 08:26:39 PM |   - Overhead:budget   0.003 M
+10/05 08:26:39 PM |   - Overhead:misc     0.449 M
+10/05 08:26:39 PM |   - Overhead total:   0.683 M
+10/05 08:26:39 PM |   - Sum (Scalable+Overhead): 107.815 M
+10/05 08:26:39 PM | ==> Final FLOPs Targets:
+10/05 08:26:39 PM |   - Max Theoretical FLOPs: 107.82 M
+10/05 08:26:39 PM |   - Target Total FLOPs (50.0%): 53.91 M
+10/05 08:26:39 PM |   - Target Scalable FLOPs for Training: -45.06 M
+10/05 08:26:39 PM | Full model total parameters: 11.175 M
+10/05 08:26:39 PM | Target total parameters (70.0%): 7.822 M
+10/05 08:26:39 PM | ==> Main model for training is ready.
+10/05 08:26:39 PM | ==> Building main model for training...
+10/05 08:26:39 PM | ==> Separating parameters into four groups for optimization...
+10/05 08:26:39 PM |  - Main backbone params: 200 tensors.
+10/05 08:26:39 PM |  - Gating (logit & static) params: 60 tensors.
+10/05 08:26:39 PM |  - Auxiliary head params: 6 tensors.
+10/05 08:26:39 PM |  - Budget generator params: 18 tensors.
+10/05 08:26:39 PM | ==> Four optimizers created successfully.
+10/05 08:26:39 PM | ==> LR scheduler set: 5-epoch linear warmup + Cosine Annealing.
+10/05 08:26:39 PM | 
+############################################################
+10/05 08:26:39 PM | #####      STARTING UNIFIED ADAPTIVE TRAINING      #####
+10/05 08:26:39 PM | Total Epochs: 5, Warmup Epochs: 2
+10/05 08:26:39 PM | Loss Weights: w_aux=0.1, w_flops=2.0, w_params_final=1.0
+10/05 08:26:39 PM | Target Total FLOPs: 53.91 MFLOPs
+10/05 08:26:39 PM | Target Total FLOPs (Train): -45.06 MFLOPs
+10/05 08:26:39 PM | ############################################################
+
+10/05 08:26:39 PM | [Epoch 1/5] [WARMUP] LR: 0.004000 | w_params: 0.0000

@@ -1,0 +1,110 @@
+10/05 01:02:48 PM | Args: Namespace(lr=0.05, epochs=5, batch_size=128, save_dir='./result_e2e_datadriven', dataset_path='/home/dancer/wxr_code/e2e_prune/data', gpu_id='4', alpha_final=0.2, w_params_final=1.0, w_params_anneal_epochs=1, target_static_params_ratio=0.72, warmup_epochs=2, annealing_epochs_pct=0.7, dynamic_rate_start=0.7, dynamic_rate_end=0.7, gate_threshold=0.1, backbone='resnet50', bottleneck_strategy='A', dataset='cifar100', img_size=None, num_workers=4, imagenet_train_dir='/home/dancer/PublicData/ImageNet/train', imagenet_val_dir='/home/dancer/PublicData/ImageNet/val', target_flops_ratio=0.47)
+10/05 01:04:58 PM | ==> Building full-size resnet50 for training and target calculation...
+10/05 01:05:00 PM | ==> Accurately calculating FLOPs breakdown from a clean, original model...
+10/05 01:05:01 PM | ==> FLOPs Sanity Check:
+10/05 01:05:01 PM |   - Total FLOPs by Global Profile (Authoritative): 1601.058 M
+10/05 01:05:01 PM |   - Total FLOPs by Sum of Parts:                 1601.023 M
+10/05 01:05:01 PM |   - Discrepancy: 0.00%
+10/05 01:05:01 PM | ==> [DEBUG] FLOPs Breakdown Details:
+10/05 01:05:01 PM |   - [CoreOnly e2e]    1311.779 M
+10/05 01:05:01 PM |   - [Global-Overhead] 1311.779 M
+10/05 01:05:01 PM |   - [CoreOnly - SumScalable] 0.035 M
+10/05 01:05:01 PM |   - Input to layer1: (C,H,W)=(64,32,32)
+10/05 01:05:01 PM |   - Input to layer2: (C,H,W)=(256,32,32)
+10/05 01:05:01 PM |   - Input to layer3: (C,H,W)=(512,16,16)
+10/05 01:05:01 PM |   - Input to layer4: (C,H,W)=(1024,8,8)
+10/05 01:05:01 PM |   - conv1+bn1 FLOPs: 2.032 M
+10/05 01:05:01 PM |   - layer1 FLOPs:     223.871 M
+10/05 01:05:01 PM |   - layer2 FLOPs:     339.608 M
+10/05 01:05:01 PM |   - layer3 FLOPs:     480.969 M
+10/05 01:05:01 PM |   - layer4 FLOPs:     265.060 M
+10/05 01:05:01 PM |   - fc FLOPs:         0.205 M
+10/05 01:05:01 PM |   - Scalable total:   1311.744 M
+10/05 01:05:01 PM |   - layer1 has 3 blocks; per-block FLOPs (M): [78.119, 72.876, 72.876]
+10/05 01:05:01 PM |     per-block inputs (C,H,W): [(64, 32, 32), (256, 32, 32), (256, 32, 32)]
+10/05 01:05:01 PM |     layer1 sum by blocks (M): 223.871
+10/05 01:05:01 PM |   - layer2 has 4 blocks; per-block FLOPs (M): [123.339, 72.09, 72.09, 72.09]
+10/05 01:05:01 PM |     per-block inputs (C,H,W): [(256, 32, 32), (512, 16, 16), (512, 16, 16), (512, 16, 16)]
+10/05 01:05:01 PM |     layer2 sum by blocks (M): 339.608
+10/05 01:05:01 PM |   - layer3 has 6 blocks; per-block FLOPs (M): [122.487, 71.696, 71.696, 71.696, 71.696, 71.696]
+10/05 01:05:01 PM |     per-block inputs (C,H,W): [(512, 16, 16), (1024, 8, 8), (1024, 8, 8), (1024, 8, 8), (1024, 8, 8), (1024, 8, 8)]
+10/05 01:05:01 PM |     layer3 sum by blocks (M): 480.969
+10/05 01:05:01 PM |   - layer4 has 3 blocks; per-block FLOPs (M): [122.061, 71.5, 71.5]
+10/05 01:05:01 PM |     per-block inputs (C,H,W): [(1024, 8, 8), (2048, 4, 4), (2048, 4, 4)]
+10/05 01:05:01 PM |     layer4 sum by blocks (M): 265.060
+10/05 01:05:01 PM |   - Overhead:gating   10.060 M
+10/05 01:05:01 PM |   - Overhead:static   1.802 M
+10/05 01:05:01 PM |   - Overhead:aux      62.259 M
+10/05 01:05:01 PM |   - Overhead:budget   0.001 M
+10/05 01:05:01 PM |   - Overhead:misc     215.157 M
+10/05 01:05:01 PM |   - Overhead total:   289.279 M
+10/05 01:05:01 PM |   - Sum (Scalable+Overhead): 1601.023 M
+10/05 01:05:01 PM | ==> Final FLOPs Targets:
+10/05 01:05:01 PM |   - Max Theoretical FLOPs: 1601.06 M
+10/05 01:05:01 PM |   - Target Total FLOPs (47.0%): 752.50 M
+10/05 01:05:01 PM |   - Target Scalable FLOPs for Training: 460.98 M
+10/05 01:05:01 PM | Full model total parameters: 44.607 M
+10/05 01:05:01 PM | Target total parameters (72.0%): 32.117 M
+10/05 01:05:01 PM | ==> Main model for training is ready.
+10/05 01:05:01 PM | ==> Building main model for training...
+10/05 01:05:02 PM | ==> Separating parameters into four groups for optimization...
+10/05 01:05:02 PM |  - Main backbone params: 161 tensors.
+10/05 01:05:02 PM |  - Gating (logit & static) params: 48 tensors.
+10/05 01:05:02 PM |  - Auxiliary head params: 15 tensors.
+10/05 01:05:02 PM |  - Budget generator params: 18 tensors.
+10/05 01:05:02 PM | ==> Four optimizers created successfully.
+10/05 01:05:02 PM | ==> LR scheduler set: 5-epoch linear warmup + Cosine Annealing.
+10/05 01:05:02 PM | 
+############################################################
+10/05 01:05:02 PM | #####      STARTING UNIFIED ADAPTIVE TRAINING      #####
+10/05 01:05:02 PM | Total Epochs: 5, Warmup Epochs: 2
+10/05 01:05:02 PM | Loss Weights: w_aux=0.1, w_flops=2.0, w_params_final=1.0
+10/05 01:05:02 PM | Target Total FLOPs: 752.50 MFLOPs
+10/05 01:05:02 PM | Target Total FLOPs (Train): 460.98 MFLOPs
+10/05 01:05:02 PM | ############################################################
+
+10/05 01:05:02 PM | [Epoch 1/5] [WARMUP] LR: 0.004000 | w_params: 0.0000
+10/05 01:05:30 PM |  * Validation (Epoch 0): Acc@1 3.440 Acc@5 14.400
+10/05 01:05:30 PM | ==> New best accuracy: 3.44% at epoch 1
+10/05 01:05:32 PM | [Epoch 2/5] [WARMUP] LR: 0.013200 | w_params: 0.0000
+10/05 01:05:58 PM |  * Validation (Epoch 1): Acc@1 10.690 Acc@5 32.380
+10/05 01:05:58 PM | ==> New best accuracy: 10.69% at epoch 2
+10/05 01:06:00 PM | [Epoch 3/5] [JOINT TRAINING] LR: 0.022400 | w_params: 0.0000
+10/05 01:06:45 PM |  * Validation (Epoch 2): Acc@1 16.310 Acc@5 43.600
+10/05 01:06:45 PM | ==> New best accuracy: 16.31% at epoch 3
+10/05 01:06:49 PM | [Epoch 4/5] [JOINT TRAINING] LR: 0.031600 | w_params: 1.0000
+10/05 01:07:36 PM |  * Validation (Epoch 3): Acc@1 20.960 Acc@5 51.450
+10/05 01:07:36 PM | ==> New best accuracy: 20.96% at epoch 4
+10/05 01:07:40 PM | [Epoch 5/5] [JOINT TRAINING] LR: 0.040800 | w_params: 1.0000
+10/05 01:08:24 PM |  * Validation (Epoch 4): Acc@1 25.040 Acc@5 54.860
+10/05 01:08:24 PM | ==> New best accuracy: 25.04% at epoch 5
+10/05 01:08:27 PM | End-to-end training completed. Best validation accuracy: 25.040%
+10/05 01:08:27 PM | 
+############################################################
+10/05 01:08:27 PM | #####      ANALYZING FINAL PRUNED MODEL STATS (UNIFIED)      #####
+10/05 01:08:27 PM | ############################################################
+
+10/05 01:08:27 PM | --- [Step 1] Baseline Full Model Stats ---
+10/05 01:08:27 PM |   - Original Model Parameters: 44.607 M
+10/05 01:08:27 PM |   - Original Model Max FLOPs:  1601.058 M
+10/05 01:08:27 PM | 
+--- [Step 2] Final Static Structure Stats ---
+10/05 01:08:27 PM |   - Statically Pruned Model Parameters: 23.690 M
+10/05 01:08:27 PM | 
+--- [Step 3] Calculating Average Dynamic FLOPs... ---
+10/05 01:08:27 PM | --- [Unified FLOPs Calculator] Starting final analysis over validation set...
+10/05 01:08:30 PM | --- [Unified FLOPs Calculator] Analysis complete.
+10/05 01:08:30 PM |     - Average Total FLOPs: 790.783 M
+10/05 01:08:30 PM | 
+--- [Step 4] Pruning Analysis Summary ---
+10/05 01:08:30 PM |   - Parameters: 44.607 M -> 23.690 M (Reduced by 46.89%)
+10/05 01:08:30 PM |   - FLOPs:      1.601 G -> 0.791 G (Avg, Reduced by 50.61%)
+10/05 01:08:30 PM | 
+--- [Step 5] Final Performance Validation ---
+10/05 01:08:31 PM |  * Final Performance Validation: Acc@1 25.040 Acc@5 54.860
+10/05 01:08:31 PM | 
+############################################################
+10/05 01:08:31 PM | #####      ANALYSIS COMPLETE      #####
+10/05 01:08:31 PM | ############################################################
+
+10/05 01:08:31 PM | End-to-end pruning process finished successfully.

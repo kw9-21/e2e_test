@@ -1,0 +1,573 @@
+10/04 01:27:05 PM | Args: Namespace(lr=0.05, epochs=200, batch_size=256, save_dir='./result_e2e_datadriven', dataset_path='/home/dancer/wxr_code/e2e_prune/data', gpu_id='4', alpha_final=0.2, w_params_final=1.0, w_params_anneal_epochs=75, target_static_params_ratio=0.5, warmup_epochs=50, annealing_epochs_pct=0.7, dynamic_rate_start=0.7, dynamic_rate_end=0.7, gate_threshold=0.1, backbone='resnet50', target_flops_ratio=0.5)
+10/04 01:27:06 PM | ==> Building full-size resnet50 for training and target calculation...
+10/04 01:27:07 PM | ==> Accurately calculating FLOPs breakdown from a clean, original model...
+10/04 01:27:09 PM | ==> FLOPs Sanity Check:
+10/04 01:27:09 PM |   - Total FLOPs by Global Profile (Authoritative): 1559.586 M
+10/04 01:27:09 PM |   - Total FLOPs by Sum of Parts:                 559.330 M
+10/04 01:27:09 PM |   - Discrepancy: 64.14%
+10/04 01:27:09 PM |   - Sanity Check Warning: Discrepancy > 5%.
+10/04 01:27:09 PM | ==> Final FLOPs Targets:
+10/04 01:27:09 PM |   - Max Theoretical FLOPs: 1559.59 M
+10/04 01:27:09 PM |   - Target Total FLOPs (50.0%): 779.79 M
+10/04 01:27:09 PM |   - Target Scalable FLOPs for Training: 715.74 M
+10/04 01:27:09 PM | Full model total parameters: 44.341 M
+10/04 01:27:09 PM | Target total parameters (50.0%): 22.171 M
+10/04 01:27:09 PM | ==> Main model for training is ready.
+10/04 01:27:09 PM | ==> Building main model for training...
+10/04 01:27:10 PM | ==> Separating parameters into four groups for optimization...
+10/04 01:27:10 PM |  - Main backbone params: 161 tensors.
+10/04 01:27:10 PM |  - Gating (logit & static) params: 48 tensors.
+10/04 01:27:10 PM |  - Auxiliary head params: 15 tensors.
+10/04 01:27:10 PM |  - Budget generator params: 18 tensors.
+10/04 01:27:10 PM | ==> Four optimizers created successfully.
+10/04 01:27:10 PM | ==> LR scheduler set: 5-epoch linear warmup + Cosine Annealing.
+10/04 01:27:10 PM | 
+############################################################
+10/04 01:27:10 PM | #####      STARTING UNIFIED ADAPTIVE TRAINING      #####
+10/04 01:27:10 PM | Total Epochs: 200, Warmup Epochs: 50
+10/04 01:27:10 PM | Loss Weights: w_aux=0.1, w_flops=2.0, w_params_final=1.0
+10/04 01:27:10 PM | Target Total FLOPs: 779.79 MFLOPs
+10/04 01:27:10 PM | Target Total FLOPs (Train): 715.74 MFLOPs
+10/04 01:27:10 PM | ############################################################
+
+10/04 01:27:10 PM | [Epoch 1/200] [WARMUP] LR: 0.004000 | w_params: 0.0000
+10/04 01:27:35 PM |  * Validation (Epoch 0): Acc@1 24.030 Acc@5 77.900
+10/04 01:27:35 PM | ==> New best accuracy: 24.03% at epoch 1
+10/04 01:27:37 PM | [Epoch 2/200] [WARMUP] LR: 0.013200 | w_params: 0.0000
+10/04 01:28:01 PM |  * Validation (Epoch 1): Acc@1 36.890 Acc@5 88.010
+10/04 01:28:01 PM | ==> New best accuracy: 36.89% at epoch 2
+10/04 01:28:03 PM | [Epoch 3/200] [WARMUP] LR: 0.022400 | w_params: 0.0000
+10/04 01:28:27 PM |  * Validation (Epoch 2): Acc@1 47.280 Acc@5 93.450
+10/04 01:28:27 PM | ==> New best accuracy: 47.28% at epoch 3
+10/04 01:28:29 PM | [Epoch 4/200] [WARMUP] LR: 0.031600 | w_params: 0.0000
+10/04 01:28:52 PM |  * Validation (Epoch 3): Acc@1 53.520 Acc@5 94.640
+10/04 01:28:52 PM | ==> New best accuracy: 53.52% at epoch 4
+10/04 01:28:54 PM | [Epoch 5/200] [WARMUP] LR: 0.040800 | w_params: 0.0000
+10/04 01:29:18 PM |  * Validation (Epoch 4): Acc@1 63.410 Acc@5 96.340
+10/04 01:29:18 PM | ==> New best accuracy: 63.41% at epoch 5
+10/04 01:29:20 PM | [Epoch 6/200] [WARMUP] LR: 0.050000 | w_params: 0.0000
+10/04 01:29:20 PM | [Visualizer] Generating uncertainty heatmap for epoch 5, batch 0...
+10/04 01:29:21 PM | [Visualizer] Saved uncertainty heatmap to ./result_e2e_datadriven/uncertainty_heatmaps/uncertainty_epoch_005_batch_000.png
+10/04 01:29:21 PM | [Visualizer] Generating uncertainty heatmap for epoch 5, batch 1...
+10/04 01:29:22 PM | [Visualizer] Saved uncertainty heatmap to ./result_e2e_datadriven/uncertainty_heatmaps/uncertainty_epoch_005_batch_001.png
+10/04 01:29:43 PM | [Visualizer] Generating static gate heatmap for epoch 5...
+10/04 01:29:44 PM | [Visualizer] Saved static gate heatmap to ./result_e2e_datadriven/static_gate_heatmaps/gate_heatmap_epoch_005.png
+10/04 01:29:45 PM |  * Validation (Epoch 5): Acc@1 68.530 Acc@5 97.270
+10/04 01:29:45 PM | ==> New best accuracy: 68.53% at epoch 6
+10/04 01:29:48 PM | [Epoch 7/200] [WARMUP] LR: 0.049997 | w_params: 0.0000
+10/04 01:30:11 PM |  * Validation (Epoch 6): Acc@1 68.860 Acc@5 97.610
+10/04 01:30:11 PM | ==> New best accuracy: 68.86% at epoch 7
+10/04 01:30:13 PM | [Epoch 8/200] [WARMUP] LR: 0.049987 | w_params: 0.0000
+10/04 01:30:37 PM |  * Validation (Epoch 7): Acc@1 75.750 Acc@5 98.180
+10/04 01:30:37 PM | ==> New best accuracy: 75.75% at epoch 8
+10/04 01:30:39 PM | [Epoch 9/200] [WARMUP] LR: 0.049971 | w_params: 0.0000
+10/04 01:31:02 PM |  * Validation (Epoch 8): Acc@1 80.860 Acc@5 98.760
+10/04 01:31:02 PM | ==> New best accuracy: 80.86% at epoch 9
+10/04 01:31:05 PM | [Epoch 10/200] [WARMUP] LR: 0.049948 | w_params: 0.0000
+10/04 01:31:28 PM |  * Validation (Epoch 9): Acc@1 78.420 Acc@5 99.010
+10/04 01:31:29 PM | [Epoch 11/200] [WARMUP] LR: 0.049919 | w_params: 0.0000
+10/04 01:31:53 PM |  * Validation (Epoch 10): Acc@1 78.260 Acc@5 98.720
+10/04 01:31:54 PM | [Epoch 12/200] [WARMUP] LR: 0.049883 | w_params: 0.0000
+10/04 01:32:17 PM |  * Validation (Epoch 11): Acc@1 74.990 Acc@5 98.390
+10/04 01:32:18 PM | [Epoch 13/200] [WARMUP] LR: 0.049841 | w_params: 0.0000
+10/04 01:32:42 PM |  * Validation (Epoch 12): Acc@1 82.080 Acc@5 99.220
+10/04 01:32:42 PM | ==> New best accuracy: 82.08% at epoch 13
+10/04 01:32:44 PM | [Epoch 14/200] [WARMUP] LR: 0.049793 | w_params: 0.0000
+10/04 01:33:07 PM |  * Validation (Epoch 13): Acc@1 82.790 Acc@5 99.250
+10/04 01:33:07 PM | ==> New best accuracy: 82.79% at epoch 14
+10/04 01:33:10 PM | [Epoch 15/200] [WARMUP] LR: 0.049738 | w_params: 0.0000
+10/04 01:33:33 PM |  * Validation (Epoch 14): Acc@1 77.980 Acc@5 98.920
+10/04 01:33:34 PM | [Epoch 16/200] [WARMUP] LR: 0.049676 | w_params: 0.0000
+10/04 01:33:35 PM | [Visualizer] Generating uncertainty heatmap for epoch 15, batch 0...
+10/04 01:33:35 PM | [Visualizer] Saved uncertainty heatmap to ./result_e2e_datadriven/uncertainty_heatmaps/uncertainty_epoch_015_batch_000.png
+10/04 01:33:35 PM | [Visualizer] Generating uncertainty heatmap for epoch 15, batch 1...
+10/04 01:33:36 PM | [Visualizer] Saved uncertainty heatmap to ./result_e2e_datadriven/uncertainty_heatmaps/uncertainty_epoch_015_batch_001.png
+10/04 01:33:59 PM |  * Validation (Epoch 15): Acc@1 85.230 Acc@5 99.520
+10/04 01:33:59 PM | ==> New best accuracy: 85.23% at epoch 16
+10/04 01:34:01 PM | [Epoch 17/200] [WARMUP] LR: 0.049608 | w_params: 0.0000
+10/04 01:34:25 PM |  * Validation (Epoch 16): Acc@1 83.590 Acc@5 99.420
+10/04 01:34:26 PM | [Epoch 18/200] [WARMUP] LR: 0.049534 | w_params: 0.0000
+10/04 01:34:49 PM |  * Validation (Epoch 17): Acc@1 85.830 Acc@5 99.500
+10/04 01:34:49 PM | ==> New best accuracy: 85.83% at epoch 18
+10/04 01:34:51 PM | [Epoch 19/200] [WARMUP] LR: 0.049454 | w_params: 0.0000
+10/04 01:35:15 PM |  * Validation (Epoch 18): Acc@1 84.490 Acc@5 99.110
+10/04 01:35:16 PM | [Epoch 20/200] [WARMUP] LR: 0.049367 | w_params: 0.0000
+10/04 01:35:40 PM |  * Validation (Epoch 19): Acc@1 83.860 Acc@5 99.640
+10/04 01:35:41 PM | [Epoch 21/200] [WARMUP] LR: 0.049274 | w_params: 0.0000
+10/04 01:36:04 PM |  * Validation (Epoch 20): Acc@1 86.640 Acc@5 99.490
+10/04 01:36:04 PM | ==> New best accuracy: 86.64% at epoch 21
+10/04 01:36:06 PM | [Epoch 22/200] [WARMUP] LR: 0.049174 | w_params: 0.0000
+10/04 01:36:30 PM |  * Validation (Epoch 21): Acc@1 84.320 Acc@5 99.380
+10/04 01:36:31 PM | [Epoch 23/200] [WARMUP] LR: 0.049068 | w_params: 0.0000
+10/04 01:36:54 PM |  * Validation (Epoch 22): Acc@1 86.840 Acc@5 99.400
+10/04 01:36:54 PM | ==> New best accuracy: 86.84% at epoch 23
+10/04 01:36:57 PM | [Epoch 24/200] [WARMUP] LR: 0.048956 | w_params: 0.0000
+10/04 01:37:20 PM |  * Validation (Epoch 23): Acc@1 87.460 Acc@5 99.680
+10/04 01:37:20 PM | ==> New best accuracy: 87.46% at epoch 24
+10/04 01:37:22 PM | [Epoch 25/200] [WARMUP] LR: 0.048838 | w_params: 0.0000
+10/04 01:37:46 PM |  * Validation (Epoch 24): Acc@1 85.790 Acc@5 99.280
+10/04 01:37:47 PM | [Epoch 26/200] [WARMUP] LR: 0.048713 | w_params: 0.0000
+10/04 01:38:10 PM |  * Validation (Epoch 25): Acc@1 87.510 Acc@5 99.670
+10/04 01:38:10 PM | ==> New best accuracy: 87.51% at epoch 26
+10/04 01:38:12 PM | [Epoch 27/200] [WARMUP] LR: 0.048583 | w_params: 0.0000
+10/04 01:38:36 PM |  * Validation (Epoch 26): Acc@1 88.320 Acc@5 99.600
+10/04 01:38:36 PM | ==> New best accuracy: 88.32% at epoch 27
+10/04 01:38:38 PM | [Epoch 28/200] [WARMUP] LR: 0.048446 | w_params: 0.0000
+10/04 01:39:01 PM |  * Validation (Epoch 27): Acc@1 84.650 Acc@5 98.920
+10/04 01:39:02 PM | [Epoch 29/200] [WARMUP] LR: 0.048303 | w_params: 0.0000
+10/04 01:39:26 PM |  * Validation (Epoch 28): Acc@1 87.900 Acc@5 99.510
+10/04 01:39:27 PM | [Epoch 30/200] [WARMUP] LR: 0.048154 | w_params: 0.0000
+10/04 01:39:50 PM |  * Validation (Epoch 29): Acc@1 89.080 Acc@5 99.610
+10/04 01:39:50 PM | ==> New best accuracy: 89.08% at epoch 30
+10/04 01:39:52 PM | [Epoch 31/200] [WARMUP] LR: 0.047999 | w_params: 0.0000
+10/04 01:40:16 PM |  * Validation (Epoch 30): Acc@1 88.180 Acc@5 99.500
+10/04 01:40:17 PM | [Epoch 32/200] [WARMUP] LR: 0.047839 | w_params: 0.0000
+10/04 01:40:40 PM |  * Validation (Epoch 31): Acc@1 87.210 Acc@5 99.630
+10/04 01:40:42 PM | [Epoch 33/200] [WARMUP] LR: 0.047672 | w_params: 0.0000
+10/04 01:41:05 PM |  * Validation (Epoch 32): Acc@1 87.470 Acc@5 99.510
+10/04 01:41:06 PM | [Epoch 34/200] [WARMUP] LR: 0.047499 | w_params: 0.0000
+10/04 01:41:29 PM |  * Validation (Epoch 33): Acc@1 86.940 Acc@5 99.390
+10/04 01:41:31 PM | [Epoch 35/200] [WARMUP] LR: 0.047321 | w_params: 0.0000
+10/04 01:41:54 PM |  * Validation (Epoch 34): Acc@1 88.920 Acc@5 99.650
+10/04 01:41:55 PM | [Epoch 36/200] [WARMUP] LR: 0.047136 | w_params: 0.0000
+10/04 01:41:55 PM | [Visualizer] Generating uncertainty heatmap for epoch 35, batch 0...
+10/04 01:41:56 PM | [Visualizer] Saved uncertainty heatmap to ./result_e2e_datadriven/uncertainty_heatmaps/uncertainty_epoch_035_batch_000.png
+10/04 01:41:56 PM | [Visualizer] Generating uncertainty heatmap for epoch 35, batch 1...
+10/04 01:41:57 PM | [Visualizer] Saved uncertainty heatmap to ./result_e2e_datadriven/uncertainty_heatmaps/uncertainty_epoch_035_batch_001.png
+10/04 01:42:18 PM | [Visualizer] Generating static gate heatmap for epoch 35...
+10/04 01:42:19 PM | [Visualizer] Saved static gate heatmap to ./result_e2e_datadriven/static_gate_heatmaps/gate_heatmap_epoch_035.png
+10/04 01:42:20 PM |  * Validation (Epoch 35): Acc@1 87.820 Acc@5 99.720
+10/04 01:42:22 PM | [Epoch 37/200] [WARMUP] LR: 0.046946 | w_params: 0.0000
+10/04 01:42:45 PM |  * Validation (Epoch 36): Acc@1 86.220 Acc@5 99.370
+10/04 01:42:46 PM | [Epoch 38/200] [WARMUP] LR: 0.046751 | w_params: 0.0000
+10/04 01:43:10 PM |  * Validation (Epoch 37): Acc@1 87.320 Acc@5 99.620
+10/04 01:43:11 PM | [Epoch 39/200] [WARMUP] LR: 0.046549 | w_params: 0.0000
+10/04 01:43:34 PM |  * Validation (Epoch 38): Acc@1 88.510 Acc@5 99.520
+10/04 01:43:36 PM | [Epoch 40/200] [WARMUP] LR: 0.046342 | w_params: 0.0000
+10/04 01:43:59 PM |  * Validation (Epoch 39): Acc@1 88.740 Acc@5 99.560
+10/04 01:44:00 PM | [Epoch 41/200] [WARMUP] LR: 0.046130 | w_params: 0.0000
+10/04 01:44:24 PM |  * Validation (Epoch 40): Acc@1 88.300 Acc@5 99.590
+10/04 01:44:25 PM | [Epoch 42/200] [WARMUP] LR: 0.045912 | w_params: 0.0000
+10/04 01:44:48 PM |  * Validation (Epoch 41): Acc@1 88.320 Acc@5 99.600
+10/04 01:44:49 PM | [Epoch 43/200] [WARMUP] LR: 0.045688 | w_params: 0.0000
+10/04 01:45:13 PM |  * Validation (Epoch 42): Acc@1 88.590 Acc@5 99.670
+10/04 01:45:14 PM | [Epoch 44/200] [WARMUP] LR: 0.045460 | w_params: 0.0000
+10/04 01:45:38 PM |  * Validation (Epoch 43): Acc@1 88.010 Acc@5 99.620
+10/04 01:45:39 PM | [Epoch 45/200] [WARMUP] LR: 0.045225 | w_params: 0.0000
+10/04 01:46:02 PM |  * Validation (Epoch 44): Acc@1 89.690 Acc@5 99.660
+10/04 01:46:02 PM | ==> New best accuracy: 89.69% at epoch 45
+10/04 01:46:04 PM | [Epoch 46/200] [WARMUP] LR: 0.044986 | w_params: 0.0000
+10/04 01:46:28 PM |  * Validation (Epoch 45): Acc@1 89.640 Acc@5 99.670
+10/04 01:46:29 PM | [Epoch 47/200] [WARMUP] LR: 0.044742 | w_params: 0.0000
+10/04 01:46:52 PM |  * Validation (Epoch 46): Acc@1 88.080 Acc@5 99.650
+10/04 01:46:54 PM | [Epoch 48/200] [WARMUP] LR: 0.044492 | w_params: 0.0000
+10/04 01:47:17 PM |  * Validation (Epoch 47): Acc@1 88.690 Acc@5 99.640
+10/04 01:47:18 PM | [Epoch 49/200] [WARMUP] LR: 0.044237 | w_params: 0.0000
+10/04 01:47:42 PM |  * Validation (Epoch 48): Acc@1 89.560 Acc@5 99.710
+10/04 01:47:43 PM | [Epoch 50/200] [WARMUP] LR: 0.043977 | w_params: 0.0000
+10/04 01:48:06 PM |  * Validation (Epoch 49): Acc@1 89.450 Acc@5 99.620
+10/04 01:48:08 PM | [Epoch 51/200] [JOINT TRAINING] LR: 0.043713 | w_params: 0.0000
+10/04 01:48:08 PM | [Visualizer] Generating uncertainty-budget heatmap for epoch 50, batch 0...
+10/04 01:48:08 PM | [Visualizer] Saved uncertainty-budget heatmap to ./result_e2e_datadriven/uncertainty_budget_heatmaps/uncertainty_budget_epoch_050_batch_000.png
+10/04 01:48:09 PM | [Visualizer] Generating uncertainty-budget heatmap for epoch 50, batch 1...
+10/04 01:48:10 PM | [Visualizer] Saved uncertainty-budget heatmap to ./result_e2e_datadriven/uncertainty_budget_heatmaps/uncertainty_budget_epoch_050_batch_001.png
+10/04 01:48:47 PM |  * Validation (Epoch 50): Acc@1 85.660 Acc@5 99.400
+10/04 01:48:48 PM | [Epoch 52/200] [JOINT TRAINING] LR: 0.043443 | w_params: 0.0133
+10/04 01:49:26 PM |  * Validation (Epoch 51): Acc@1 89.740 Acc@5 99.640
+10/04 01:49:26 PM | ==> New best accuracy: 89.74% at epoch 52
+10/04 01:49:29 PM | [Epoch 53/200] [JOINT TRAINING] LR: 0.043169 | w_params: 0.0267
+10/04 01:50:07 PM |  * Validation (Epoch 52): Acc@1 87.600 Acc@5 99.400
+10/04 01:50:08 PM | [Epoch 54/200] [JOINT TRAINING] LR: 0.042890 | w_params: 0.0400
+10/04 01:50:46 PM |  * Validation (Epoch 53): Acc@1 90.230 Acc@5 99.640
+10/04 01:50:46 PM | ==> New best accuracy: 90.23% at epoch 54
+10/04 01:50:49 PM | [Epoch 55/200] [JOINT TRAINING] LR: 0.042606 | w_params: 0.0533
+10/04 01:51:26 PM |  * Validation (Epoch 54): Acc@1 89.260 Acc@5 99.720
+10/04 01:51:28 PM | [Epoch 56/200] [JOINT TRAINING] LR: 0.042318 | w_params: 0.0667
+10/04 01:52:05 PM |  * Validation (Epoch 55): Acc@1 88.920 Acc@5 99.650
+10/04 01:52:07 PM | [Epoch 57/200] [JOINT TRAINING] LR: 0.042025 | w_params: 0.0800
+10/04 01:52:44 PM |  * Validation (Epoch 56): Acc@1 90.620 Acc@5 99.750
+10/04 01:52:44 PM | ==> New best accuracy: 90.62% at epoch 57
+10/04 01:52:47 PM | [Epoch 58/200] [JOINT TRAINING] LR: 0.041728 | w_params: 0.0933
+10/04 01:53:25 PM |  * Validation (Epoch 57): Acc@1 89.870 Acc@5 99.620
+10/04 01:53:26 PM | [Epoch 59/200] [JOINT TRAINING] LR: 0.041427 | w_params: 0.1067
+10/04 01:54:04 PM |  * Validation (Epoch 58): Acc@1 90.050 Acc@5 99.710
+10/04 01:54:05 PM | [Epoch 60/200] [JOINT TRAINING] LR: 0.041121 | w_params: 0.1200
+10/04 01:54:43 PM |  * Validation (Epoch 59): Acc@1 90.060 Acc@5 99.730
+10/04 01:54:45 PM | [Epoch 61/200] [JOINT TRAINING] LR: 0.040811 | w_params: 0.1333
+10/04 01:55:23 PM |  * Validation (Epoch 60): Acc@1 89.740 Acc@5 99.660
+10/04 01:55:24 PM | [Epoch 62/200] [JOINT TRAINING] LR: 0.040497 | w_params: 0.1467
+10/04 01:56:02 PM |  * Validation (Epoch 61): Acc@1 90.460 Acc@5 99.700
+10/04 01:56:03 PM | [Epoch 63/200] [JOINT TRAINING] LR: 0.040179 | w_params: 0.1600
+10/04 01:56:41 PM |  * Validation (Epoch 62): Acc@1 87.700 Acc@5 99.640
+10/04 01:56:42 PM | [Epoch 64/200] [JOINT TRAINING] LR: 0.039857 | w_params: 0.1733
+10/04 01:57:20 PM |  * Validation (Epoch 63): Acc@1 90.500 Acc@5 99.710
+10/04 01:57:21 PM | [Epoch 65/200] [JOINT TRAINING] LR: 0.039531 | w_params: 0.1867
+10/04 01:57:59 PM |  * Validation (Epoch 64): Acc@1 90.460 Acc@5 99.740
+10/04 01:58:00 PM | [Epoch 66/200] [JOINT TRAINING] LR: 0.039202 | w_params: 0.2000
+10/04 01:58:38 PM |  * Validation (Epoch 65): Acc@1 89.660 Acc@5 99.590
+10/04 01:58:39 PM | [Epoch 67/200] [JOINT TRAINING] LR: 0.038868 | w_params: 0.2133
+10/04 01:59:17 PM |  * Validation (Epoch 66): Acc@1 90.690 Acc@5 99.740
+10/04 01:59:17 PM | ==> New best accuracy: 90.69% at epoch 67
+10/04 01:59:20 PM | [Epoch 68/200] [JOINT TRAINING] LR: 0.038531 | w_params: 0.2267
+10/04 01:59:57 PM |  * Validation (Epoch 67): Acc@1 87.520 Acc@5 99.530
+10/04 01:59:59 PM | [Epoch 69/200] [JOINT TRAINING] LR: 0.038191 | w_params: 0.2400
+10/04 02:00:36 PM |  * Validation (Epoch 68): Acc@1 88.190 Acc@5 99.420
+10/04 02:00:38 PM | [Epoch 70/200] [JOINT TRAINING] LR: 0.037847 | w_params: 0.2533
+10/04 02:01:15 PM |  * Validation (Epoch 69): Acc@1 87.800 Acc@5 99.340
+10/04 02:01:16 PM | [Epoch 71/200] [JOINT TRAINING] LR: 0.037500 | w_params: 0.2667
+10/04 02:01:53 PM |  * Validation (Epoch 70): Acc@1 89.240 Acc@5 99.610
+10/04 02:01:55 PM | [Epoch 72/200] [JOINT TRAINING] LR: 0.037150 | w_params: 0.2800
+10/04 02:02:31 PM |  * Validation (Epoch 71): Acc@1 89.600 Acc@5 99.680
+10/04 02:02:33 PM | [Epoch 73/200] [JOINT TRAINING] LR: 0.036796 | w_params: 0.2933
+10/04 02:03:10 PM |  * Validation (Epoch 72): Acc@1 89.090 Acc@5 99.430
+10/04 02:03:12 PM | [Epoch 74/200] [JOINT TRAINING] LR: 0.036439 | w_params: 0.3067
+10/04 02:03:49 PM |  * Validation (Epoch 73): Acc@1 89.380 Acc@5 99.670
+10/04 02:03:51 PM | [Epoch 75/200] [JOINT TRAINING] LR: 0.036080 | w_params: 0.3200
+10/04 02:04:28 PM |  * Validation (Epoch 74): Acc@1 90.600 Acc@5 99.800
+10/04 02:04:30 PM | [Epoch 76/200] [JOINT TRAINING] LR: 0.035717 | w_params: 0.3333
+10/04 02:04:30 PM | [Visualizer] Generating uncertainty-budget heatmap for epoch 75, batch 0...
+10/04 02:04:31 PM | [Visualizer] Saved uncertainty-budget heatmap to ./result_e2e_datadriven/uncertainty_budget_heatmaps/uncertainty_budget_epoch_075_batch_000.png
+10/04 02:04:31 PM | [Visualizer] Generating uncertainty-budget heatmap for epoch 75, batch 1...
+10/04 02:04:32 PM | [Visualizer] Saved uncertainty-budget heatmap to ./result_e2e_datadriven/uncertainty_budget_heatmaps/uncertainty_budget_epoch_075_batch_001.png
+10/04 02:05:06 PM | [Visualizer] Generating static gate heatmap for epoch 75...
+10/04 02:05:07 PM | [Visualizer] Saved static gate heatmap to ./result_e2e_datadriven/static_gate_heatmaps/gate_heatmap_epoch_075.png
+10/04 02:05:10 PM |  * Validation (Epoch 75): Acc@1 91.150 Acc@5 99.780
+10/04 02:05:10 PM | ==> New best accuracy: 91.15% at epoch 76
+10/04 02:05:13 PM | [Epoch 77/200] [JOINT TRAINING] LR: 0.035352 | w_params: 0.3467
+10/04 02:05:50 PM |  * Validation (Epoch 76): Acc@1 90.670 Acc@5 99.690
+10/04 02:05:52 PM | [Epoch 78/200] [JOINT TRAINING] LR: 0.034984 | w_params: 0.3600
+10/04 02:06:29 PM |  * Validation (Epoch 77): Acc@1 89.710 Acc@5 99.700
+10/04 02:06:31 PM | [Epoch 79/200] [JOINT TRAINING] LR: 0.034614 | w_params: 0.3733
+10/04 02:07:08 PM |  * Validation (Epoch 78): Acc@1 89.830 Acc@5 99.640
+10/04 02:07:09 PM | [Epoch 80/200] [JOINT TRAINING] LR: 0.034241 | w_params: 0.3867
+10/04 02:07:47 PM |  * Validation (Epoch 79): Acc@1 90.360 Acc@5 99.600
+10/04 02:07:49 PM | [Epoch 81/200] [JOINT TRAINING] LR: 0.033865 | w_params: 0.4000
+10/04 02:08:26 PM |  * Validation (Epoch 80): Acc@1 89.390 Acc@5 99.660
+10/04 02:08:28 PM | [Epoch 82/200] [JOINT TRAINING] LR: 0.033487 | w_params: 0.4133
+10/04 02:09:05 PM |  * Validation (Epoch 81): Acc@1 89.640 Acc@5 99.570
+10/04 02:09:07 PM | [Epoch 83/200] [JOINT TRAINING] LR: 0.033107 | w_params: 0.4267
+10/04 02:09:44 PM |  * Validation (Epoch 82): Acc@1 89.510 Acc@5 99.650
+10/04 02:09:46 PM | [Epoch 84/200] [JOINT TRAINING] LR: 0.032725 | w_params: 0.4400
+10/04 02:10:23 PM |  * Validation (Epoch 83): Acc@1 90.460 Acc@5 99.720
+10/04 02:10:24 PM | [Epoch 85/200] [JOINT TRAINING] LR: 0.032341 | w_params: 0.4533
+10/04 02:11:02 PM |  * Validation (Epoch 84): Acc@1 90.140 Acc@5 99.670
+10/04 02:11:04 PM | [Epoch 86/200] [JOINT TRAINING] LR: 0.031955 | w_params: 0.4667
+10/04 02:11:40 PM |  * Validation (Epoch 85): Acc@1 90.750 Acc@5 99.670
+10/04 02:11:42 PM | [Epoch 87/200] [JOINT TRAINING] LR: 0.031568 | w_params: 0.4800
+10/04 02:12:19 PM |  * Validation (Epoch 86): Acc@1 89.200 Acc@5 99.470
+10/04 02:12:20 PM | [Epoch 88/200] [JOINT TRAINING] LR: 0.031178 | w_params: 0.4933
+10/04 02:12:58 PM |  * Validation (Epoch 87): Acc@1 90.060 Acc@5 99.660
+10/04 02:12:59 PM | [Epoch 89/200] [JOINT TRAINING] LR: 0.030787 | w_params: 0.5067
+10/04 02:13:37 PM |  * Validation (Epoch 88): Acc@1 90.140 Acc@5 99.600
+10/04 02:13:38 PM | [Epoch 90/200] [JOINT TRAINING] LR: 0.030395 | w_params: 0.5200
+10/04 02:14:16 PM |  * Validation (Epoch 89): Acc@1 89.760 Acc@5 99.560
+10/04 02:14:18 PM | [Epoch 91/200] [JOINT TRAINING] LR: 0.030001 | w_params: 0.5333
+10/04 02:14:55 PM |  * Validation (Epoch 90): Acc@1 91.150 Acc@5 99.660
+10/04 02:14:57 PM | [Epoch 92/200] [JOINT TRAINING] LR: 0.029605 | w_params: 0.5467
+10/04 02:15:34 PM |  * Validation (Epoch 91): Acc@1 91.530 Acc@5 99.740
+10/04 02:15:34 PM | ==> New best accuracy: 91.53% at epoch 92
+10/04 02:15:37 PM | [Epoch 93/200] [JOINT TRAINING] LR: 0.029209 | w_params: 0.5600
+10/04 02:16:14 PM |  * Validation (Epoch 92): Acc@1 91.840 Acc@5 99.740
+10/04 02:16:14 PM | ==> New best accuracy: 91.84% at epoch 93
+10/04 02:16:17 PM | [Epoch 94/200] [JOINT TRAINING] LR: 0.028811 | w_params: 0.5733
+10/04 02:16:54 PM |  * Validation (Epoch 93): Acc@1 89.150 Acc@5 99.650
+10/04 02:16:56 PM | [Epoch 95/200] [JOINT TRAINING] LR: 0.028413 | w_params: 0.5867
+10/04 02:17:33 PM |  * Validation (Epoch 94): Acc@1 90.560 Acc@5 99.690
+10/04 02:17:35 PM | [Epoch 96/200] [JOINT TRAINING] LR: 0.028013 | w_params: 0.6000
+10/04 02:18:12 PM |  * Validation (Epoch 95): Acc@1 90.540 Acc@5 99.600
+10/04 02:18:14 PM | [Epoch 97/200] [JOINT TRAINING] LR: 0.027613 | w_params: 0.6133
+10/04 02:18:51 PM |  * Validation (Epoch 96): Acc@1 91.390 Acc@5 99.730
+10/04 02:18:53 PM | [Epoch 98/200] [JOINT TRAINING] LR: 0.027212 | w_params: 0.6267
+10/04 02:19:31 PM |  * Validation (Epoch 97): Acc@1 91.070 Acc@5 99.690
+10/04 02:19:32 PM | [Epoch 99/200] [JOINT TRAINING] LR: 0.026811 | w_params: 0.6400
+10/04 02:20:09 PM |  * Validation (Epoch 98): Acc@1 91.740 Acc@5 99.810
+10/04 02:20:11 PM | [Epoch 100/200] [JOINT TRAINING] LR: 0.026409 | w_params: 0.6533
+10/04 02:20:48 PM |  * Validation (Epoch 99): Acc@1 92.530 Acc@5 99.770
+10/04 02:20:48 PM | ==> New best accuracy: 92.53% at epoch 100
+10/04 02:20:51 PM | [Epoch 101/200] [JOINT TRAINING] LR: 0.026007 | w_params: 0.6667
+10/04 02:20:51 PM | [Visualizer] Generating uncertainty-budget heatmap for epoch 100, batch 0...
+10/04 02:20:52 PM | [Visualizer] Saved uncertainty-budget heatmap to ./result_e2e_datadriven/uncertainty_budget_heatmaps/uncertainty_budget_epoch_100_batch_000.png
+10/04 02:20:52 PM | [Visualizer] Generating uncertainty-budget heatmap for epoch 100, batch 1...
+10/04 02:20:53 PM | [Visualizer] Saved uncertainty-budget heatmap to ./result_e2e_datadriven/uncertainty_budget_heatmaps/uncertainty_budget_epoch_100_batch_001.png
+10/04 02:21:30 PM |  * Validation (Epoch 100): Acc@1 91.200 Acc@5 99.730
+10/04 02:21:31 PM | [Epoch 102/200] [JOINT TRAINING] LR: 0.025604 | w_params: 0.6800
+10/04 02:22:09 PM |  * Validation (Epoch 101): Acc@1 91.900 Acc@5 99.610
+10/04 02:22:10 PM | [Epoch 103/200] [JOINT TRAINING] LR: 0.025201 | w_params: 0.6933
+10/04 02:22:48 PM |  * Validation (Epoch 102): Acc@1 91.210 Acc@5 99.640
+10/04 02:22:49 PM | [Epoch 104/200] [JOINT TRAINING] LR: 0.024799 | w_params: 0.7067
+10/04 02:23:27 PM |  * Validation (Epoch 103): Acc@1 90.440 Acc@5 99.740
+10/04 02:23:28 PM | [Epoch 105/200] [JOINT TRAINING] LR: 0.024396 | w_params: 0.7200
+10/04 02:24:06 PM |  * Validation (Epoch 104): Acc@1 89.390 Acc@5 99.680
+10/04 02:24:07 PM | [Epoch 106/200] [JOINT TRAINING] LR: 0.023993 | w_params: 0.7333
+10/04 02:24:42 PM | [Visualizer] Generating static gate heatmap for epoch 105...
+10/04 02:24:43 PM | [Visualizer] Saved static gate heatmap to ./result_e2e_datadriven/static_gate_heatmaps/gate_heatmap_epoch_105.png
+10/04 02:24:45 PM |  * Validation (Epoch 105): Acc@1 90.660 Acc@5 99.630
+10/04 02:24:47 PM | [Epoch 107/200] [JOINT TRAINING] LR: 0.023591 | w_params: 0.7467
+10/04 02:25:24 PM |  * Validation (Epoch 106): Acc@1 89.580 Acc@5 99.670
+10/04 02:25:25 PM | [Epoch 108/200] [JOINT TRAINING] LR: 0.023189 | w_params: 0.7600
+10/04 02:26:02 PM |  * Validation (Epoch 107): Acc@1 91.690 Acc@5 99.750
+10/04 02:26:04 PM | [Epoch 109/200] [JOINT TRAINING] LR: 0.022788 | w_params: 0.7733
+10/04 02:26:41 PM |  * Validation (Epoch 108): Acc@1 91.580 Acc@5 99.730
+10/04 02:26:43 PM | [Epoch 110/200] [JOINT TRAINING] LR: 0.022387 | w_params: 0.7867
+10/04 02:27:21 PM |  * Validation (Epoch 109): Acc@1 91.510 Acc@5 99.730
+10/04 02:27:22 PM | [Epoch 111/200] [JOINT TRAINING] LR: 0.021987 | w_params: 0.8000
+10/04 02:27:59 PM |  * Validation (Epoch 110): Acc@1 91.330 Acc@5 99.730
+10/04 02:28:01 PM | [Epoch 112/200] [JOINT TRAINING] LR: 0.021587 | w_params: 0.8133
+10/04 02:28:38 PM |  * Validation (Epoch 111): Acc@1 91.050 Acc@5 99.670
+10/04 02:28:39 PM | [Epoch 113/200] [JOINT TRAINING] LR: 0.021189 | w_params: 0.8267
+10/04 02:29:17 PM |  * Validation (Epoch 112): Acc@1 92.560 Acc@5 99.860
+10/04 02:29:17 PM | ==> New best accuracy: 92.56% at epoch 113
+10/04 02:29:20 PM | [Epoch 114/200] [JOINT TRAINING] LR: 0.020791 | w_params: 0.8400
+10/04 02:29:57 PM |  * Validation (Epoch 113): Acc@1 91.880 Acc@5 99.630
+10/04 02:29:58 PM | [Epoch 115/200] [JOINT TRAINING] LR: 0.020395 | w_params: 0.8533
+10/04 02:30:36 PM |  * Validation (Epoch 114): Acc@1 90.720 Acc@5 99.700
+10/04 02:30:37 PM | [Epoch 116/200] [JOINT TRAINING] LR: 0.019999 | w_params: 0.8667
+10/04 02:30:38 PM | [Visualizer] Generating uncertainty-budget heatmap for epoch 115, batch 0...
+10/04 02:30:38 PM | [Visualizer] Saved uncertainty-budget heatmap to ./result_e2e_datadriven/uncertainty_budget_heatmaps/uncertainty_budget_epoch_115_batch_000.png
+10/04 02:30:38 PM | [Visualizer] Generating uncertainty-budget heatmap for epoch 115, batch 1...
+10/04 02:30:39 PM | [Visualizer] Saved uncertainty-budget heatmap to ./result_e2e_datadriven/uncertainty_budget_heatmaps/uncertainty_budget_epoch_115_batch_001.png
+10/04 02:31:16 PM |  * Validation (Epoch 115): Acc@1 92.000 Acc@5 99.650
+10/04 02:31:18 PM | [Epoch 117/200] [JOINT TRAINING] LR: 0.019605 | w_params: 0.8800
+10/04 02:31:55 PM |  * Validation (Epoch 116): Acc@1 92.560 Acc@5 99.740
+10/04 02:31:57 PM | [Epoch 118/200] [JOINT TRAINING] LR: 0.019213 | w_params: 0.8933
+10/04 02:32:33 PM |  * Validation (Epoch 117): Acc@1 90.990 Acc@5 99.650
+10/04 02:32:35 PM | [Epoch 119/200] [JOINT TRAINING] LR: 0.018822 | w_params: 0.9067
+10/04 02:33:12 PM |  * Validation (Epoch 118): Acc@1 92.530 Acc@5 99.710
+10/04 02:33:14 PM | [Epoch 120/200] [JOINT TRAINING] LR: 0.018432 | w_params: 0.9200
+10/04 02:33:51 PM |  * Validation (Epoch 119): Acc@1 92.680 Acc@5 99.780
+10/04 02:33:51 PM | ==> New best accuracy: 92.68% at epoch 120
+10/04 02:33:54 PM | [Epoch 121/200] [JOINT TRAINING] LR: 0.018045 | w_params: 0.9333
+10/04 02:34:31 PM |  * Validation (Epoch 120): Acc@1 92.500 Acc@5 99.640
+10/04 02:34:33 PM | [Epoch 122/200] [JOINT TRAINING] LR: 0.017659 | w_params: 0.9467
+10/04 02:35:10 PM |  * Validation (Epoch 121): Acc@1 92.470 Acc@5 99.810
+10/04 02:35:11 PM | [Epoch 123/200] [JOINT TRAINING] LR: 0.017275 | w_params: 0.9600
+10/04 02:35:49 PM |  * Validation (Epoch 122): Acc@1 91.850 Acc@5 99.710
+10/04 02:35:50 PM | [Epoch 124/200] [JOINT TRAINING] LR: 0.016893 | w_params: 0.9733
+10/04 02:36:28 PM |  * Validation (Epoch 123): Acc@1 92.940 Acc@5 99.710
+10/04 02:36:28 PM | ==> New best accuracy: 92.94% at epoch 124
+10/04 02:36:31 PM | [Epoch 125/200] [JOINT TRAINING] LR: 0.016513 | w_params: 0.9867
+10/04 02:37:08 PM |  * Validation (Epoch 124): Acc@1 92.560 Acc@5 99.800
+10/04 02:37:10 PM | [Epoch 126/200] [JOINT TRAINING] LR: 0.016135 | w_params: 1.0000
+10/04 02:37:47 PM |  * Validation (Epoch 125): Acc@1 92.640 Acc@5 99.700
+10/04 02:37:48 PM | [Epoch 127/200] [JOINT TRAINING] LR: 0.015759 | w_params: 1.0000
+10/04 02:38:26 PM |  * Validation (Epoch 126): Acc@1 92.190 Acc@5 99.790
+10/04 02:38:27 PM | [Epoch 128/200] [JOINT TRAINING] LR: 0.015386 | w_params: 1.0000
+10/04 02:39:05 PM |  * Validation (Epoch 127): Acc@1 92.570 Acc@5 99.790
+10/04 02:39:07 PM | [Epoch 129/200] [JOINT TRAINING] LR: 0.015016 | w_params: 1.0000
+10/04 02:39:44 PM |  * Validation (Epoch 128): Acc@1 92.470 Acc@5 99.850
+10/04 02:39:46 PM | [Epoch 130/200] [JOINT TRAINING] LR: 0.014648 | w_params: 1.0000
+10/04 02:40:23 PM |  * Validation (Epoch 129): Acc@1 93.340 Acc@5 99.770
+10/04 02:40:23 PM | ==> New best accuracy: 93.34% at epoch 130
+10/04 02:40:26 PM | [Epoch 131/200] [JOINT TRAINING] LR: 0.014283 | w_params: 1.0000
+10/04 02:41:04 PM |  * Validation (Epoch 130): Acc@1 93.020 Acc@5 99.860
+10/04 02:41:06 PM | [Epoch 132/200] [JOINT TRAINING] LR: 0.013920 | w_params: 1.0000
+10/04 02:41:43 PM |  * Validation (Epoch 131): Acc@1 93.220 Acc@5 99.740
+10/04 02:41:45 PM | [Epoch 133/200] [JOINT TRAINING] LR: 0.013561 | w_params: 1.0000
+10/04 02:42:22 PM |  * Validation (Epoch 132): Acc@1 92.780 Acc@5 99.700
+10/04 02:42:24 PM | [Epoch 134/200] [JOINT TRAINING] LR: 0.013204 | w_params: 1.0000
+10/04 02:43:02 PM |  * Validation (Epoch 133): Acc@1 92.320 Acc@5 99.780
+10/04 02:43:03 PM | [Epoch 135/200] [JOINT TRAINING] LR: 0.012850 | w_params: 1.0000
+10/04 02:43:41 PM |  * Validation (Epoch 134): Acc@1 93.470 Acc@5 99.730
+10/04 02:43:41 PM | ==> New best accuracy: 93.47% at epoch 135
+10/04 02:43:44 PM | [Epoch 136/200] [JOINT TRAINING] LR: 0.012500 | w_params: 1.0000
+10/04 02:43:44 PM | [Visualizer] Generating uncertainty-budget heatmap for epoch 135, batch 0...
+10/04 02:43:45 PM | [Visualizer] Saved uncertainty-budget heatmap to ./result_e2e_datadriven/uncertainty_budget_heatmaps/uncertainty_budget_epoch_135_batch_000.png
+10/04 02:43:45 PM | [Visualizer] Generating uncertainty-budget heatmap for epoch 135, batch 1...
+10/04 02:43:46 PM | [Visualizer] Saved uncertainty-budget heatmap to ./result_e2e_datadriven/uncertainty_budget_heatmaps/uncertainty_budget_epoch_135_batch_001.png
+10/04 02:44:20 PM | [Visualizer] Generating static gate heatmap for epoch 135...
+10/04 02:44:21 PM | [Visualizer] Saved static gate heatmap to ./result_e2e_datadriven/static_gate_heatmaps/gate_heatmap_epoch_135.png
+10/04 02:44:24 PM |  * Validation (Epoch 135): Acc@1 93.690 Acc@5 99.750
+10/04 02:44:24 PM | ==> New best accuracy: 93.69% at epoch 136
+10/04 02:44:27 PM | [Epoch 137/200] [JOINT TRAINING] LR: 0.012153 | w_params: 1.0000
+10/04 02:45:05 PM |  * Validation (Epoch 136): Acc@1 93.000 Acc@5 99.860
+10/04 02:45:06 PM | [Epoch 138/200] [JOINT TRAINING] LR: 0.011809 | w_params: 1.0000
+10/04 02:45:44 PM |  * Validation (Epoch 137): Acc@1 93.330 Acc@5 99.870
+10/04 02:45:45 PM | [Epoch 139/200] [JOINT TRAINING] LR: 0.011469 | w_params: 1.0000
+10/04 02:46:23 PM |  * Validation (Epoch 138): Acc@1 92.330 Acc@5 99.720
+10/04 02:46:25 PM | [Epoch 140/200] [JOINT TRAINING] LR: 0.011132 | w_params: 1.0000
+10/04 02:47:03 PM |  * Validation (Epoch 139): Acc@1 92.840 Acc@5 99.840
+10/04 02:47:04 PM | [Epoch 141/200] [JOINT TRAINING] LR: 0.010798 | w_params: 1.0000
+10/04 02:47:42 PM |  * Validation (Epoch 140): Acc@1 93.120 Acc@5 99.760
+10/04 02:47:44 PM | [Epoch 142/200] [JOINT TRAINING] LR: 0.010469 | w_params: 1.0000
+10/04 02:48:22 PM |  * Validation (Epoch 141): Acc@1 93.650 Acc@5 99.850
+10/04 02:48:23 PM | [Epoch 143/200] [JOINT TRAINING] LR: 0.010143 | w_params: 1.0000
+10/04 02:49:01 PM |  * Validation (Epoch 142): Acc@1 93.700 Acc@5 99.850
+10/04 02:49:01 PM | ==> New best accuracy: 93.70% at epoch 143
+10/04 02:49:04 PM | [Epoch 144/200] [JOINT TRAINING] LR: 0.009821 | w_params: 1.0000
+10/04 02:49:41 PM |  * Validation (Epoch 143): Acc@1 93.800 Acc@5 99.880
+10/04 02:49:41 PM | ==> New best accuracy: 93.80% at epoch 144
+10/04 02:49:44 PM | [Epoch 145/200] [JOINT TRAINING] LR: 0.009503 | w_params: 1.0000
+10/04 02:50:22 PM |  * Validation (Epoch 144): Acc@1 93.410 Acc@5 99.750
+10/04 02:50:23 PM | [Epoch 146/200] [JOINT TRAINING] LR: 0.009189 | w_params: 1.0000
+10/04 02:51:01 PM |  * Validation (Epoch 145): Acc@1 93.650 Acc@5 99.820
+10/04 02:51:02 PM | [Epoch 147/200] [JOINT TRAINING] LR: 0.008879 | w_params: 1.0000
+10/04 02:51:40 PM |  * Validation (Epoch 146): Acc@1 93.980 Acc@5 99.810
+10/04 02:51:40 PM | ==> New best accuracy: 93.98% at epoch 147
+10/04 02:51:43 PM | [Epoch 148/200] [JOINT TRAINING] LR: 0.008573 | w_params: 1.0000
+10/04 02:52:21 PM |  * Validation (Epoch 147): Acc@1 93.940 Acc@5 99.660
+10/04 02:52:22 PM | [Epoch 149/200] [JOINT TRAINING] LR: 0.008272 | w_params: 1.0000
+10/04 02:52:59 PM |  * Validation (Epoch 148): Acc@1 93.700 Acc@5 99.840
+10/04 02:53:01 PM | [Epoch 150/200] [JOINT TRAINING] LR: 0.007975 | w_params: 1.0000
+10/04 02:53:38 PM |  * Validation (Epoch 149): Acc@1 94.090 Acc@5 99.830
+10/04 02:53:38 PM | ==> New best accuracy: 94.09% at epoch 150
+10/04 02:53:41 PM | [Epoch 151/200] [JOINT TRAINING] LR: 0.007682 | w_params: 1.0000
+10/04 02:53:42 PM | [Visualizer] Generating uncertainty-budget heatmap for epoch 150, batch 0...
+10/04 02:53:42 PM | [Visualizer] Saved uncertainty-budget heatmap to ./result_e2e_datadriven/uncertainty_budget_heatmaps/uncertainty_budget_epoch_150_batch_000.png
+10/04 02:53:43 PM | [Visualizer] Generating uncertainty-budget heatmap for epoch 150, batch 1...
+10/04 02:53:43 PM | [Visualizer] Saved uncertainty-budget heatmap to ./result_e2e_datadriven/uncertainty_budget_heatmaps/uncertainty_budget_epoch_150_batch_001.png
+10/04 02:54:21 PM |  * Validation (Epoch 150): Acc@1 94.160 Acc@5 99.850
+10/04 02:54:21 PM | ==> New best accuracy: 94.16% at epoch 151
+10/04 02:54:24 PM | [Epoch 152/200] [JOINT TRAINING] LR: 0.007394 | w_params: 1.0000
+10/04 02:55:02 PM |  * Validation (Epoch 151): Acc@1 94.440 Acc@5 99.770
+10/04 02:55:02 PM | ==> New best accuracy: 94.44% at epoch 152
+10/04 02:55:05 PM | [Epoch 153/200] [JOINT TRAINING] LR: 0.007110 | w_params: 1.0000
+10/04 02:55:43 PM |  * Validation (Epoch 152): Acc@1 94.170 Acc@5 99.870
+10/04 02:55:44 PM | [Epoch 154/200] [JOINT TRAINING] LR: 0.006831 | w_params: 1.0000
+10/04 02:56:22 PM |  * Validation (Epoch 153): Acc@1 94.380 Acc@5 99.800
+10/04 02:56:23 PM | [Epoch 155/200] [JOINT TRAINING] LR: 0.006557 | w_params: 1.0000
+10/04 02:57:01 PM |  * Validation (Epoch 154): Acc@1 94.150 Acc@5 99.710
+10/04 02:57:03 PM | [Epoch 156/200] [JOINT TRAINING] LR: 0.006287 | w_params: 1.0000
+10/04 02:57:41 PM |  * Validation (Epoch 155): Acc@1 94.640 Acc@5 99.810
+10/04 02:57:41 PM | ==> New best accuracy: 94.64% at epoch 156
+10/04 02:57:44 PM | [Epoch 157/200] [JOINT TRAINING] LR: 0.006023 | w_params: 1.0000
+10/04 02:58:21 PM |  * Validation (Epoch 156): Acc@1 94.610 Acc@5 99.840
+10/04 02:58:23 PM | [Epoch 158/200] [JOINT TRAINING] LR: 0.005763 | w_params: 1.0000
+10/04 02:59:01 PM |  * Validation (Epoch 157): Acc@1 94.700 Acc@5 99.740
+10/04 02:59:01 PM | ==> New best accuracy: 94.70% at epoch 158
+10/04 02:59:04 PM | [Epoch 159/200] [JOINT TRAINING] LR: 0.005508 | w_params: 1.0000
+10/04 02:59:41 PM |  * Validation (Epoch 158): Acc@1 95.120 Acc@5 99.710
+10/04 02:59:41 PM | ==> New best accuracy: 95.12% at epoch 159
+10/04 02:59:44 PM | [Epoch 160/200] [JOINT TRAINING] LR: 0.005258 | w_params: 1.0000
+10/04 03:00:21 PM |  * Validation (Epoch 159): Acc@1 95.130 Acc@5 99.830
+10/04 03:00:21 PM | ==> New best accuracy: 95.13% at epoch 160
+10/04 03:00:24 PM | [Epoch 161/200] [JOINT TRAINING] LR: 0.005014 | w_params: 1.0000
+10/04 03:01:02 PM |  * Validation (Epoch 160): Acc@1 95.320 Acc@5 99.810
+10/04 03:01:02 PM | ==> New best accuracy: 95.32% at epoch 161
+10/04 03:01:05 PM | [Epoch 162/200] [JOINT TRAINING] LR: 0.004775 | w_params: 1.0000
+10/04 03:01:43 PM |  * Validation (Epoch 161): Acc@1 95.180 Acc@5 99.830
+10/04 03:01:44 PM | [Epoch 163/200] [JOINT TRAINING] LR: 0.004540 | w_params: 1.0000
+10/04 03:02:21 PM |  * Validation (Epoch 162): Acc@1 95.360 Acc@5 99.740
+10/04 03:02:21 PM | ==> New best accuracy: 95.36% at epoch 163
+10/04 03:02:24 PM | [Epoch 164/200] [JOINT TRAINING] LR: 0.004312 | w_params: 1.0000
+10/04 03:03:02 PM |  * Validation (Epoch 163): Acc@1 95.450 Acc@5 99.770
+10/04 03:03:02 PM | ==> New best accuracy: 95.45% at epoch 164
+10/04 03:03:05 PM | [Epoch 165/200] [JOINT TRAINING] LR: 0.004088 | w_params: 1.0000
+10/04 03:03:42 PM |  * Validation (Epoch 164): Acc@1 95.160 Acc@5 99.790
+10/04 03:03:44 PM | [Epoch 166/200] [JOINT TRAINING] LR: 0.003870 | w_params: 1.0000
+10/04 03:04:19 PM | [Visualizer] Generating static gate heatmap for epoch 165...
+10/04 03:04:20 PM | [Visualizer] Saved static gate heatmap to ./result_e2e_datadriven/static_gate_heatmaps/gate_heatmap_epoch_165.png
+10/04 03:04:23 PM |  * Validation (Epoch 165): Acc@1 95.430 Acc@5 99.850
+10/04 03:04:24 PM | [Epoch 167/200] [JOINT TRAINING] LR: 0.003658 | w_params: 1.0000
+10/04 03:05:02 PM |  * Validation (Epoch 166): Acc@1 95.440 Acc@5 99.830
+10/04 03:05:04 PM | [Epoch 168/200] [JOINT TRAINING] LR: 0.003451 | w_params: 1.0000
+10/04 03:05:41 PM |  * Validation (Epoch 167): Acc@1 95.010 Acc@5 99.790
+10/04 03:05:42 PM | [Epoch 169/200] [JOINT TRAINING] LR: 0.003249 | w_params: 1.0000
+10/04 03:06:20 PM |  * Validation (Epoch 168): Acc@1 95.350 Acc@5 99.780
+10/04 03:06:21 PM | [Epoch 170/200] [JOINT TRAINING] LR: 0.003054 | w_params: 1.0000
+10/04 03:06:59 PM |  * Validation (Epoch 169): Acc@1 95.570 Acc@5 99.850
+10/04 03:06:59 PM | ==> New best accuracy: 95.57% at epoch 170
+10/04 03:07:02 PM | [Epoch 171/200] [JOINT TRAINING] LR: 0.002864 | w_params: 1.0000
+10/04 03:07:40 PM |  * Validation (Epoch 170): Acc@1 95.360 Acc@5 99.850
+10/04 03:07:42 PM | [Epoch 172/200] [JOINT TRAINING] LR: 0.002679 | w_params: 1.0000
+10/04 03:08:19 PM |  * Validation (Epoch 171): Acc@1 95.590 Acc@5 99.850
+10/04 03:08:19 PM | ==> New best accuracy: 95.59% at epoch 172
+10/04 03:08:22 PM | [Epoch 173/200] [JOINT TRAINING] LR: 0.002501 | w_params: 1.0000
+10/04 03:09:00 PM |  * Validation (Epoch 172): Acc@1 95.530 Acc@5 99.850
+10/04 03:09:01 PM | [Epoch 174/200] [JOINT TRAINING] LR: 0.002328 | w_params: 1.0000
+10/04 03:09:39 PM |  * Validation (Epoch 173): Acc@1 95.570 Acc@5 99.830
+10/04 03:09:41 PM | [Epoch 175/200] [JOINT TRAINING] LR: 0.002161 | w_params: 1.0000
+10/04 03:10:18 PM |  * Validation (Epoch 174): Acc@1 95.430 Acc@5 99.800
+10/04 03:10:20 PM | [Epoch 176/200] [JOINT TRAINING] LR: 0.002001 | w_params: 1.0000
+10/04 03:10:20 PM | [Visualizer] Generating uncertainty-budget heatmap for epoch 175, batch 0...
+10/04 03:10:21 PM | [Visualizer] Saved uncertainty-budget heatmap to ./result_e2e_datadriven/uncertainty_budget_heatmaps/uncertainty_budget_epoch_175_batch_000.png
+10/04 03:10:21 PM | [Visualizer] Generating uncertainty-budget heatmap for epoch 175, batch 1...
+10/04 03:10:22 PM | [Visualizer] Saved uncertainty-budget heatmap to ./result_e2e_datadriven/uncertainty_budget_heatmaps/uncertainty_budget_epoch_175_batch_001.png
+10/04 03:10:59 PM |  * Validation (Epoch 175): Acc@1 95.530 Acc@5 99.790
+10/04 03:11:01 PM | [Epoch 177/200] [JOINT TRAINING] LR: 0.001846 | w_params: 1.0000
+10/04 03:11:38 PM |  * Validation (Epoch 176): Acc@1 95.440 Acc@5 99.790
+10/04 03:11:40 PM | [Epoch 178/200] [JOINT TRAINING] LR: 0.001697 | w_params: 1.0000
+10/04 03:12:18 PM |  * Validation (Epoch 177): Acc@1 95.610 Acc@5 99.830
+10/04 03:12:18 PM | ==> New best accuracy: 95.61% at epoch 178
+10/04 03:12:21 PM | [Epoch 179/200] [JOINT TRAINING] LR: 0.001554 | w_params: 1.0000
+10/04 03:12:58 PM |  * Validation (Epoch 178): Acc@1 95.670 Acc@5 99.850
+10/04 03:12:58 PM | ==> New best accuracy: 95.67% at epoch 179
+10/04 03:13:02 PM | [Epoch 180/200] [JOINT TRAINING] LR: 0.001417 | w_params: 1.0000
+10/04 03:13:39 PM |  * Validation (Epoch 179): Acc@1 95.550 Acc@5 99.810
+10/04 03:13:41 PM | [Epoch 181/200] [JOINT TRAINING] LR: 0.001287 | w_params: 1.0000
+10/04 03:14:18 PM |  * Validation (Epoch 180): Acc@1 95.670 Acc@5 99.840
+10/04 03:14:20 PM | [Epoch 182/200] [JOINT TRAINING] LR: 0.001162 | w_params: 1.0000
+10/04 03:14:58 PM |  * Validation (Epoch 181): Acc@1 95.680 Acc@5 99.840
+10/04 03:14:58 PM | ==> New best accuracy: 95.68% at epoch 182
+10/04 03:15:01 PM | [Epoch 183/200] [JOINT TRAINING] LR: 0.001044 | w_params: 1.0000
+10/04 03:15:38 PM |  * Validation (Epoch 182): Acc@1 95.600 Acc@5 99.830
+10/04 03:15:40 PM | [Epoch 184/200] [JOINT TRAINING] LR: 0.000932 | w_params: 1.0000
+10/04 03:16:17 PM |  * Validation (Epoch 183): Acc@1 95.560 Acc@5 99.850
+10/04 03:16:19 PM | [Epoch 185/200] [JOINT TRAINING] LR: 0.000826 | w_params: 1.0000
+10/04 03:16:57 PM |  * Validation (Epoch 184): Acc@1 95.630 Acc@5 99.840
+10/04 03:16:58 PM | [Epoch 186/200] [JOINT TRAINING] LR: 0.000726 | w_params: 1.0000
+10/04 03:17:36 PM |  * Validation (Epoch 185): Acc@1 95.690 Acc@5 99.840
+10/04 03:17:36 PM | ==> New best accuracy: 95.69% at epoch 186
+10/04 03:17:39 PM | [Epoch 187/200] [JOINT TRAINING] LR: 0.000633 | w_params: 1.0000
+10/04 03:18:17 PM |  * Validation (Epoch 186): Acc@1 95.620 Acc@5 99.830
+10/04 03:18:18 PM | [Epoch 188/200] [JOINT TRAINING] LR: 0.000546 | w_params: 1.0000
+10/04 03:18:56 PM |  * Validation (Epoch 187): Acc@1 95.530 Acc@5 99.830
+10/04 03:18:57 PM | [Epoch 189/200] [JOINT TRAINING] LR: 0.000466 | w_params: 1.0000
+10/04 03:19:35 PM |  * Validation (Epoch 188): Acc@1 95.630 Acc@5 99.850
+10/04 03:19:37 PM | [Epoch 190/200] [JOINT TRAINING] LR: 0.000392 | w_params: 1.0000
+10/04 03:20:14 PM |  * Validation (Epoch 189): Acc@1 95.570 Acc@5 99.820
+10/04 03:20:16 PM | [Epoch 191/200] [JOINT TRAINING] LR: 0.000324 | w_params: 1.0000
+10/04 03:20:53 PM |  * Validation (Epoch 190): Acc@1 95.610 Acc@5 99.840
+10/04 03:20:55 PM | [Epoch 192/200] [JOINT TRAINING] LR: 0.000262 | w_params: 1.0000
+10/04 03:21:33 PM |  * Validation (Epoch 191): Acc@1 95.660 Acc@5 99.850
+10/04 03:21:34 PM | [Epoch 193/200] [JOINT TRAINING] LR: 0.000207 | w_params: 1.0000
+10/04 03:22:12 PM |  * Validation (Epoch 192): Acc@1 95.650 Acc@5 99.820
+10/04 03:22:13 PM | [Epoch 194/200] [JOINT TRAINING] LR: 0.000159 | w_params: 1.0000
+10/04 03:22:51 PM |  * Validation (Epoch 193): Acc@1 95.610 Acc@5 99.820
+10/04 03:22:53 PM | [Epoch 195/200] [JOINT TRAINING] LR: 0.000117 | w_params: 1.0000
+10/04 03:23:30 PM |  * Validation (Epoch 194): Acc@1 95.540 Acc@5 99.830
+10/04 03:23:32 PM | [Epoch 196/200] [JOINT TRAINING] LR: 0.000081 | w_params: 1.0000
+10/04 03:23:32 PM | [Visualizer] Generating uncertainty-budget heatmap for epoch 195, batch 0...
+10/04 03:23:33 PM | [Visualizer] Saved uncertainty-budget heatmap to ./result_e2e_datadriven/uncertainty_budget_heatmaps/uncertainty_budget_epoch_195_batch_000.png
+10/04 03:23:33 PM | [Visualizer] Generating uncertainty-budget heatmap for epoch 195, batch 1...
+10/04 03:23:34 PM | [Visualizer] Saved uncertainty-budget heatmap to ./result_e2e_datadriven/uncertainty_budget_heatmaps/uncertainty_budget_epoch_195_batch_001.png
+10/04 03:24:08 PM | [Visualizer] Generating static gate heatmap for epoch 195...
+10/04 03:24:09 PM | [Visualizer] Saved static gate heatmap to ./result_e2e_datadriven/static_gate_heatmaps/gate_heatmap_epoch_195.png
+10/04 03:24:12 PM |  * Validation (Epoch 195): Acc@1 95.560 Acc@5 99.840
+10/04 03:24:13 PM | [Epoch 197/200] [JOINT TRAINING] LR: 0.000052 | w_params: 1.0000
+10/04 03:24:51 PM |  * Validation (Epoch 196): Acc@1 95.570 Acc@5 99.820
+10/04 03:24:52 PM | [Epoch 198/200] [JOINT TRAINING] LR: 0.000029 | w_params: 1.0000
+10/04 03:25:30 PM |  * Validation (Epoch 197): Acc@1 95.580 Acc@5 99.840
+10/04 03:25:32 PM | [Epoch 199/200] [JOINT TRAINING] LR: 0.000013 | w_params: 1.0000
+10/04 03:26:09 PM |  * Validation (Epoch 198): Acc@1 95.660 Acc@5 99.830
+10/04 03:26:11 PM | [Epoch 200/200] [JOINT TRAINING] LR: 0.000003 | w_params: 1.0000
+10/04 03:26:48 PM |  * Validation (Epoch 199): Acc@1 95.610 Acc@5 99.830
+10/04 03:26:50 PM | End-to-end training completed. Best validation accuracy: 95.690%
+10/04 03:26:50 PM | 
+############################################################
+10/04 03:26:50 PM | #####      ANALYZING FINAL PRUNED MODEL STATS (UNIFIED)      #####
+10/04 03:26:50 PM | ############################################################
+
+10/04 03:26:50 PM | --- [Step 1] Baseline Full Model Stats ---
+10/04 03:26:50 PM |   - Original Model Parameters: 44.341 M
+10/04 03:26:50 PM |   - Original Model Max FLOPs:  1559.586 M
+10/04 03:26:50 PM | 
+--- [Step 2] Final Static Structure Stats ---
+10/04 03:26:50 PM |   - Statically Pruned Model Parameters: 22.759 M
+10/04 03:26:50 PM | 
+--- [Step 3] Calculating Average Dynamic FLOPs... ---
+10/04 03:26:50 PM | --- [Unified FLOPs Calculator] Starting final analysis over validation set...
+10/04 03:26:52 PM | --- [Unified FLOPs Calculator] Analysis complete.
+10/04 03:26:52 PM |     - Average Total FLOPs: 440.991 M
+10/04 03:26:52 PM | 
+--- [Step 4] Pruning Analysis Summary ---
+10/04 03:26:52 PM |   - Parameters: 44.341 M -> 22.759 M (Reduced by 48.67%)
+10/04 03:26:52 PM |   - FLOPs:      1.560 G -> 0.441 G (Avg, Reduced by 71.72%)
+10/04 03:26:52 PM | 
+--- [Step 5] Final Performance Validation ---
+10/04 03:26:55 PM |  * Final Performance Validation: Acc@1 95.610 Acc@5 99.830
+10/04 03:26:55 PM | 
+############################################################
+10/04 03:26:55 PM | #####      ANALYSIS COMPLETE      #####
+10/04 03:26:55 PM | ############################################################
+
+10/04 03:26:55 PM | End-to-end pruning process finished successfully.
